@@ -1,0 +1,19 @@
+---
+- name: Insert data into PostgreSQL database
+  hosts: localhost
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Insert user data dynamically
+      postgresql_query:
+        db: semaphore1
+        login_user: "{{ db_credentials.login_user }}"
+        login_password: "{{ db_credentials.login_password }}"
+        login_host: 172.26.0.2
+        port: 5432
+        query: |
+          INSERT INTO users (username, email, password_hash)
+          VALUES
+              ('user9', 'user9@example.com', ''),
+              ('user10', 'user10@example.com', '');
+
